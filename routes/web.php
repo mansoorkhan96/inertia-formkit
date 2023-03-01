@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,6 +16,16 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('show-formkit', function () {
+    return Inertia::render('Formkit');
+});
+
+Route::post('submit-formkit', function (Request $request) {
+    $request->validate(['email' => 'required|string|email']);
+
+    dd('Worked');
+})->name('submit.formkit');
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -35,4 +46,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
