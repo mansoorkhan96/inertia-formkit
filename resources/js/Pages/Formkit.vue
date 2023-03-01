@@ -1,5 +1,10 @@
 <script setup>
-const submit = (fields, node) => console.log(fields);
+import { useInertia } from "formkit-addon-inertia";
+
+const submit = (fields, node) =>
+    useInertia(node).post(route("submit.formkit"), fields, {
+        preserveScroll: true,
+    });
 </script>
 
 <template>
